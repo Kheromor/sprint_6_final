@@ -11,7 +11,6 @@ import (
 	"time"
 )
 
-// IndexHandler обрабатывает запросы к корневому эндпоинту /
 func IndexHandler(logger *log.Logger) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
@@ -76,8 +75,8 @@ func UploadHandler(logger *log.Logger, converter func(string) (string, error)) h
 			return
 		}
 
-		// Парсим форму (максимум 10MB)
-		err := r.ParseMultipartForm(10 << 20) // 10 MB
+		// Парсим форму
+		err := r.ParseMultipartForm(10 << 20)
 		if err != nil {
 			logger.Printf("Ошибка синтаксиса формы: %v", err)
 			http.Error(w, "Не удаётся разобрать форму", http.StatusBadRequest)
