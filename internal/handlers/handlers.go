@@ -163,7 +163,6 @@ func UploadHandler(logger *log.Logger, converter func(string) (string, error)) h
 	}
 }
 
-// Вспомогательная функция
 func min(a, b int) int {
 	if a < b {
 		return a
