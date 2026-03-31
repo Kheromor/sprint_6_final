@@ -20,21 +20,19 @@ func DetectAndConvert(data string) (string, error) {
 		}
 	}
 
-	wordRegex := regexp.MustCompile(`\s{2,}`)
-	words := wordRegex.Split(data, -1)
+	words := regexp.MustCompile(`\s{2,}`).Split(data, -1)
 
 	var normalizedWords []string
 	for _, word := range words {
-		// Убираем лишние пробелы внутри слова
+		// Нормализуем пробелы внутри слова
 		symbols := strings.Fields(word)
 		if len(symbols) > 0 {
 			normalizedWords = append(normalizedWords, strings.Join(symbols, " "))
 		}
 	}
 
-	// Собираем с тремя пробелами между словами (требование пакета morse)
+	// Собираем с тремя пробелами между словами
 	normalizedMorse := strings.Join(normalizedWords, "   ")
 
-	// Конвертируем в текст
 	return morse.ToText(normalizedMorse), nil
 }
